@@ -8,7 +8,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: coffeegoddd/pull-request-comment-trigger@master
+      - uses: coffeegoddd/pull-request-comment-trigger@db/rebuild-dist
         id: check
         with:
           trigger: '@deploy'
