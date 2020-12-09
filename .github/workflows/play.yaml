@@ -5,12 +5,19 @@ on:
     types: [created]
 
 jobs:
-  testing-commits-from-comment:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/github-script@v3
+      - uses: khan/pull-request-comment-trigger@master
+        id: check
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            console.log("github.context.issue.pull_request:", context.issue.pull_request);
-            console.log("github.context:", context);
+          trigger: '@deploy'
+          reaction: rocket
+        env:
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+      - run: 'echo Found it!'
+        if: steps.check.outputs.triggered == 'true'
+      - run: 'echo This is the body $BODY'
+        env:
+          BODY: ${{ steps.check.outputs.comment_body }}
+
