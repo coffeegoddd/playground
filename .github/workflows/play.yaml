@@ -8,10 +8,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: coffeegoddd/pull-request-comment-trigger@db/rebuild-dist
+      - uses: dolthub/pull-request-comment-trigger@db/add-comment
         id: check
         with:
-          trigger: '@deploy'
+          trigger: '#deploy'
           reaction: rocket
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
